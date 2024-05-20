@@ -1,0 +1,21 @@
+Title: CONTACT
+
+----
+
+Show: true
+
+----
+
+Map: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.6725582100685!2d127.02973489999998!3d37.492052699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca14ffc540d3b%3A0x44a00ab0887d8f1!2z7ISc7Jq47Yq567OE7IucIOyEnOy0iOq1rCDqsJXrgqjrjIDroZwgMzI3!5e0!3m2!1sko!2skr!4v1715882867697!5m2!1sko!2skr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+----
+
+Addr: 서울 서초구 강남대로 327, 18층 플라이웨이게임즈
+
+----
+
+Addren: 18F, 327 Gangnam-daero, Seocho-gu, Seoul, Korea 06627
+
+----
+
+Uuid: rAvHNlaJUNo6kUJK

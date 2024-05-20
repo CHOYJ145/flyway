@@ -1,0 +1,29 @@
+title: Site
+
+columns:
+  pages:
+    width: 1/2
+    sections:
+      pages:
+        type: pages
+
+  info:
+    width: 1/2
+    sections:
+      footer:
+        type: fields
+        fields:
+          copyright:
+            type: text
+          footerLink:
+            label: footer list
+            type: structure
+            max: 3
+            fields:
+              label:
+                label: label
+                type: text
+              link:
+                label: contact link
+                type: url
+

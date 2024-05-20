@@ -1,0 +1,33 @@
+Title: Sweetopia
+
+----
+
+Device: mobile
+
+----
+
+Desc:
+
+퍼즐 게임들 중에서도 기존 매치류 퍼즐의 계보를 잇는 슬라이딩 퍼즐과 매치가 결합된 새로운 방식의 게임이에요.
+수많은 스테이지들과 함께 한계를 테스트하면서 달콤한 매력에 푹 빠지실 거예요!
+Sweetopia가 준비한 맛있는 퍼즐게임! 한입 드셔보세요!
+
+----
+
+Category: Puzzle, 3Match
+
+----
+
+Contactlink:
+
+- 
+  label: Steam Store
+  link: https://store.steampowered.com/
+
+----
+
+Content: 
+
+----
+
+Uuid: krhfh99X5SP0BDfJ

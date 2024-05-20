@@ -1,0 +1,9 @@
+Sort: 2
+
+----
+
+Uuid: Gs6itHvqDj2RHUak
+
+----
+
+Template: thumbnail-game-pc

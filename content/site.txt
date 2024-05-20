@@ -1,0 +1,16 @@
+Title: FLYWAY GAMES
+
+----
+
+Copyright: © 2024 FLYWAYGAMES, Inc. All rights reserved.
+
+----
+
+Footerlink:
+
+- 
+  label: KRAFTON
+  link: ""
+- 
+  label: YOUTUBE
+  link: ""

@@ -1,0 +1,9 @@
+Sort: 2
+
+----
+
+Uuid: VclPs2UhnEshk7Rn
+
+----
+
+Template: thumbnail-game-m

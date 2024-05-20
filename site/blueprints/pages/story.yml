@@ -1,0 +1,13 @@
+title: story
+
+sections:
+  fields:
+    type: fields
+    fields:
+      show:
+        label: page active
+        type: toggle
+        width: 1/3
+        option:
+          - off
+          - on

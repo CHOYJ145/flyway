@@ -1,0 +1,71 @@
+title: game detail
+
+tabs:
+  front:
+    label: info
+    columns:
+      info:
+        width: 1/2
+        sections:
+          fields:
+            type: fields
+            fields:
+              device:
+                label: device type
+                type: multiselect
+                options:
+                  pc: pc
+                  mobile: mobile
+                  consoles: consoles
+              desc:
+                label: description
+                type: textarea
+              category:
+                label: category
+                type: tags
+              contactLink:
+                label: contact link
+                type: structure
+                max: 1
+                fields:
+                  label:
+                    label: label
+                    type: text
+                  link:
+                    label: contact link
+                    type: url
+      visual:
+        width: 1/2
+        sections:
+          thumbnailPc:
+            headline: thumbnail pc
+            type: files
+            template: thumbnail-game-pc
+          thumbnailM:
+            headline: thumbnail mobile
+            type: files
+            template: thumbnail-game-m
+
+  detail:
+    label: detail
+    sections:
+      fields1:
+        type: fields
+        fields:
+          content:
+            label: content
+            type: structure
+            fields:
+              cTitle:
+                label: 주제
+                type: textarea
+              cDesc:
+                label: 본문
+                type: textarea
+                size: small
+              cImg:
+                label: 삽입
+                type: files
+                max: 1
+                template: detail-game
+
