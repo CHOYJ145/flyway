@@ -1,0 +1,127 @@
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 16px;
+    padding-bottom: 80px;
+}
+
+.contact-type {
+    display: block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--Grey-50, #909090);
+    color: var(--bk);
+    font-size: 12px;
+    font-weight: var(--700);
+    line-height: 160%;
+    text-transform: uppercase;
+}
+
+.contact-number {
+    color:#909090;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160%; /* 25.6px */
+
+}
+
+hr {
+    border: 1px solid #343434;
+}
+
+.transport {
+    padding-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.transport-type {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: -0.24px;
+    padding-bottom: 20px;
+}
+
+.transport-line {
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--sky);
+    color: var(--bk);
+    font-size: 12px;
+    font-weight: var(--700);
+    line-height: 160%;
+}
+
+.dest-stop {
+    padding-bottom: 8px;
+}
+
+.stop-details {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+}
+
+.direction-details {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding-bottom: 8px;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .contact-info {
+        padding-bottom: 40px;
+    }
+
+
+    .addr {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%; /* 25.6px */
+
+    }
+
+    .contact-number {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 160%; /* 22.4px */
+    }
+
+    .transport {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding-top: 40px;
+    }
+
+    .transport-type {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%; /* 25.6px */
+        padding-bottom: 20px;
+    }
+
+    .stop-details {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; /* 22.4px */
+    }
+
+    .dest-stop {
+        padding-bottom: 8px;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%; /* 22.4px */
+    }
+}

@@ -8,5 +8,6 @@
     <title><?= $site->title() ?></title>
 
     <?= css('assets/css/style.css') ?>
+    <?= css('assets/css/add.css') ?>
 </head>
 <body>

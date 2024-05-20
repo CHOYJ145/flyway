@@ -2,5 +2,6 @@
 
 <?= js('assets/js/jquery-3.7.1.min.js') ?>
 <?= js('assets/js/common.js') ?>
+<?= js('assets/js/add.js') ?>
 </body>
 </html>

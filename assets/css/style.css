@@ -140,6 +140,10 @@ strong {
         padding: 84px 400px 132px;
         max-width: none;
     }
+
+    .detail-hero + .container {
+        padding: 40px 400px 80px;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -921,7 +925,7 @@ body:not(#main) {
 }
 
 body:not(#main) #app {
-    min-height: 200vh;
+    min-height: 100vh;
 }
 
 .page-title {
@@ -1074,7 +1078,40 @@ body:not(#main) #app {
 }
 
 .container--detail .game-info {
+    display: flex;
+    justify-content: space-between;
     margin-top: 0;
+}
+
+.container--detail .game-contact-link {
+    position: static;
+    margin-top: 32px;
+}
+
+.container--detail .game-desc {
+    margin-top: 0;
+}
+
+.detail-cont {
+    padding-top: 120px;
+}
+
+.detail-cont--row + .detail-cont--row {
+    margin-top: 32px;
+}
+
+.cont-title {
+    white-space: pre-wrap;
+    font-size: var(--fzEm);
+    line-height: 140%;
+    letter-spacing: -0.24px;
+}
+
+.cont-desc {
+    margin-top: 12px;
+    max-width: 600px;
+    font-weight: 500;
+    line-height: 160%;
 }
 
 @media screen and (max-width: 1024px) {
@@ -1084,13 +1121,44 @@ body:not(#main) #app {
         max-height: 470px;
     }
 
+    .container--detail .game-info {
+        display: block;
+    }
+
+    .game-info-col + .game-info-col {
+        margin-top: 24px;
+    }
+
     .container--detail .game-contact-link {
-        position: static;
         display: inline-block;
         margin-top: 24px;
         color: var(--bk);
         background: var(--sky);
         border-color: var(--sky);
+    }
+
+    .container--detail .game-contact-link.pc {
+        display: none;
+    }
+
+    .detail-cont {
+        padding-top: 60px;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .detail-cont--row + .detail-cont--row {
+        margin-top: 0;
+    }
+
+    .cont-title {
+        padding: 16px 0;
+        font-size: 20px;
+        letter-spacing: -0.2px;
+    }
+
+    .cont-desc {
+        margin-top: 0;
     }
 }
 

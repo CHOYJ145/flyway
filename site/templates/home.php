@@ -73,9 +73,13 @@
         </div>
     </section>
     <section class="sec--4">
+        <?php
+        $videoPCUrl = url('assets/file/Game_PC.webm');
+        $videoMUrl = url('assets/file/Game_MO.webm');
+        ?>
         <div class="sec-inner">
             <video class="video video--main" playsinline autoplay muted loop controlslist="nodownload">
-                <source src="<?= url('assets/file/test.mp4') ?>" type="video/mp4">
+                <source src="<?= $videoPCUrl ?>" type="video/webm">
             </video>
             <div class="cover--main">
                 <div class="d-text">
@@ -88,6 +92,27 @@
                 </a>
             </div>
         </div>
+        <script>
+            const videoPCUrl = "<?= $videoPCUrl ?>";
+            const videoMUrl = "<?= $videoMUrl ?>";
+
+            function updateVideoSource() {
+                const videoElement = document.querySelector('.video--main source');
+                const videoElementParent = document.querySelector('.video--main');
+                const currentWidth = window.innerWidth;
+
+                if (currentWidth <= 1024) {
+                    videoElement.src = videoMUrl;
+                } else {
+                    videoElement.src = videoPCUrl;
+                }
+
+                videoElementParent.load();
+            }
+
+            window.addEventListener('load', updateVideoSource);
+            window.addEventListener('resize', updateVideoSource);
+        </script>
     </section>
 </div>
 <?= snippet('footer-main') ?>

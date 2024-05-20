@@ -28,3 +28,47 @@ columns:
           addrEn:
             label: 주소 영문
             type: text
+
+
+
+
+          contacttype:
+            label: 연락처 타입
+            type: text
+          contactnumber:
+            label: 연락처
+            type: text
+
+
+
+
+          subwayline:
+            label: 지하철 노선
+            type: text
+          subwaystation:
+            label: 하차 역
+            type: text
+          subwaydirections:
+            label: 지하철에서 오는 길
+            type: text
+
+
+
+          mainbus:
+            label: 간선
+            type: text
+          intercitybus:
+            label: 시외
+            type: text
+          busstation:
+            label: 버스정류장
+            type: text
+
+
+
+          vehicleparking:
+            label: 승용차 주차장
+            type: text
+          vehicleaddress:
+            label: 승용차 주소
+            type: text

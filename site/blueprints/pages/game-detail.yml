@@ -52,7 +52,7 @@ tabs:
       fields1:
         type: fields
         fields:
-          content:
+          cont:
             label: content
             type: structure
             fields:

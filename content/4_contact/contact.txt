@@ -18,4 +18,46 @@ Addren: 18F, 327 Gangnam-daero, Seocho-gu, Seoul, Korea 06627
 
 ----
 
-Uuid: rAvHNlaJUNo6kUJK
+Contacttype: Fax
+
+----
+
+Contactnumber: 031-698-3312
+
+----
+
+Subwaystation: 강남역 하차
+
+----
+
+Subwayline: 신분당선
+
+----
+
+Subwaydirections: 강남역 5번 출구에서 양재역 방향 도보 8분
+
+----
+
+Busstation:
+
+래미안아파트, 파이낸셜뉴스(22007)하차
+
+----
+
+Mainbus: 140, 341, 400, 402, 420, 421, 440, 441
+
+----
+
+Intercitybus: 1005, 1101, 1101N, 1151, 1550-1, 1551
+
+----
+
+Vehicleparking: 대룡서초타워 주차장 이용
+
+----
+
+Vehicleaddress: 서울 서초구 강남대로 327 대룡서초타워
+
+----
+
+Uuid: lZAjD1GslG9X16Q3
