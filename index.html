@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Interaction</title>
+    <style>
+        .row-img-wrapper {
+            margin-left: 26px;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .row-img-inner {
+            display: flex;
+            column-gap: 20px;
+            justify-content: space-between; /* 이미지 간의 공간을 균등하게 분배 */
+        }
+
+        .row-img {
+            min-width: 600px;
+            width: 40%; /* 각 이미지 컨테이너의 너비를 40%로 설정 */
+            height: 200px;
+            position: relative;
+            background: red;
+            transform: translateX(90vw); /* 초기 위치를 화면 밖 오른쪽으로 설정 */
+            opacity: 0; /* 초기 투명도를 0으로 설정 */
+            animation: slideIn 1s forwards; /* 슬라이드 애니메이션 적용 */
+        }
+
+        .row-img:nth-child(1) {
+            animation-delay: 300ms;
+        }
+
+        .row-img:nth-child(2) {
+            animation-delay: 600ms;
+        }
+
+        .row-img:nth-child(3) {
+            animation-delay: 900ms;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="row-img-wrapper">
+    <div class="row-img-inner">
+        <div class="row-img img-cover"></div>
+        <div class="row-img img-cover"></div>
+        <div class="row-img img-cover"></div>
+    </div>
+</div>
+
+<script>
+</script>
+</body>
+</html>

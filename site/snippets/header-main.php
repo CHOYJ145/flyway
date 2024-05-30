@@ -7,6 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $site->title() ?></title>
 
+    <?= css('assets/css/swiper-bundle.min.css') ?>
     <?= css('assets/css/style.css') ?>
+    <style>
+        .sec3-swiper .swiper-wrapper {
+            -webkit-transition-timing-function: linear !important;
+            -o-transition-timing-function: linear !important;
+            transition-timing-function: linear !important;
+        }
+    </style>
 </head>
 <body id="main">
