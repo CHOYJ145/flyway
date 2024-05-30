@@ -11,6 +11,3 @@ Footerlink:
 - 
   label: KRAFTON
   link: ""
-- 
-  label: YOUTUBE
-  link: ""

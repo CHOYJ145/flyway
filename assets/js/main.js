@@ -67,7 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (videoWrapBottom >= window.innerHeight && videoWrapTop <= window.innerHeight) {
             const scrollProgress = (window.innerHeight - videoWrapTop) / screenHeightFifth;
             const scaleValue = Math.min(Math.max(0.6 + (1 - 0.6) * scrollProgress, 0.6), 1);
+            const borderRValue = Math.min(Math.max(32 - (32 * scrollProgress), 0), 32);
             videoWrap.style.transform = `scale(${scaleValue})`;
+            videoWrap.style.borderRadius = `${borderRValue}px`;
         }
     });
 
