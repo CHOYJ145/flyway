@@ -1,93 +1,129 @@
-document.addEventListener('DOMContentLoaded', function () {
-    window.scrollTo(0, 0);
-    document.body.classList.add('scroll--p');
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('.main-sec');
+    let currentIndex = 0;
+    let isThrottled = false;
 
-    let lastScrollPosition = 0;
-    document.addEventListener('scroll', function () {
-        const header = document.querySelector('header');
-        let currentScrollPosition = window.pageYOffset;
-        const sections = document.querySelectorAll('.sec--chk');
-        const sec2Section = document.querySelector('.sec--2.sec--chk'); // 타겟 섹션 선택
-        const sec3Section = document.querySelector('.sec--3.sec--chk'); // 타겟 섹션 선택
-        const sec4Section = document.querySelector('.sec--4.sec--chk'); // 타겟 섹션 선택
-        const triggerHeight = window.innerHeight;
-        const videoWrap = document.querySelector('.video--main-wrap');
-        const screenHeightFifth = window.innerHeight / 2;
-
-        if (currentScrollPosition > lastScrollPosition) {
-            header.classList.add('act');
-        } else if (currentScrollPosition < lastScrollPosition) {
-            header.classList.remove('act');
-        }
-
-        lastScrollPosition = currentScrollPosition;
-
-        sections.forEach(section => {
-            const sectionTop = section.getBoundingClientRect().top;
-            const sectionBottom = section.getBoundingClientRect().bottom;
-
-            if (sectionTop <= 0 && sectionBottom > 0) {
-                section.classList.add('act');
-                if(section.classList.contains('sec--3')){
-                    section.classList.add('act--s');
-                }else{
-                    section.classList.add('act');
-                }
+    function showSection(index) {
+        sections.forEach((section, idx) => {
+            if (idx === index) {
+                section.style.display = 'block';
+                section.classList.add('on');
+                setTimeout(() => {
+                    section.classList.add('view');
+                }, 500);
             } else {
-                section.classList.remove('act');
+                section.style.display = 'none';
+                section.classList.remove('on');
+                setTimeout(() => {
+                    section.classList.remove('view');
+                }, 250);
             }
         });
+    }
 
-        // sec--3 섹션에 대한 조건
-        const sec3Top = sec3Section.getBoundingClientRect().top;
-        const sec3Bottom = sec3Section.getBoundingClientRect().bottom;
+    function handleScroll(event) {
+        if (document.body.classList.contains('scroll--p') || isThrottled) return;
 
-        if (sec3Top <= triggerHeight && sec3Bottom >= triggerHeight) {
-            sec3Section.classList.add('etc');
-            sec2Section.classList.add('act--f');
+        const currentSection = sections[currentIndex];
+        const ms3Container = currentSection.querySelector('.ms3-container');
+
+        if (currentIndex === 2 && ms3Container) {
+            if (event.deltaY > 0 && ms3Container.scrollTop + ms3Container.clientHeight < ms3Container.scrollHeight) {
+                return;
+            } else if (event.deltaY < 0 && ms3Container.scrollTop > 0) {
+                return;
+            }
+        }
+
+        if (event.deltaY > 0) {
+            currentIndex = Math.min(currentIndex + 1, sections.length - 1);
         } else {
-            sec3Section.classList.remove('etc');
-            sec2Section.classList.remove('act--f');
+            currentIndex = Math.max(currentIndex - 1, 0);
         }
 
-        // sec--4 섹션에 대한 조건
-        const sec4Top = sec4Section.getBoundingClientRect().top;
-        const sec4Bottom = sec4Section.getBoundingClientRect().bottom;
+        showSection(currentIndex);
+        isThrottled = true;
 
-        if (sec4Top <= triggerHeight && sec4Bottom >= triggerHeight) {
-            sec4Section.classList.add('etc');
+        setTimeout(() => {
+            isThrottled = false;
+        }, 1200); // 휠 감도
+    }
+
+    function handleSwipe(deltaY) {
+        if (document.body.classList.contains('scroll--p')) return;
+
+        const currentSection = sections[currentIndex];
+        const ms3Container = currentSection.querySelector('.ms3-container');
+
+        if (currentIndex === 2 && ms3Container) {
+            if (deltaY > 0 && ms3Container.scrollTop + ms3Container.clientHeight < ms3Container.scrollHeight) {
+                return;
+            } else if (deltaY < 0 && ms3Container.scrollTop > 0) {
+                return;
+            }
+        }
+
+        if (deltaY > 0) {
+            currentIndex = Math.min(currentIndex + 1, sections.length - 1);
         } else {
-            sec4Section.classList.remove('etc');
+            currentIndex = Math.max(currentIndex - 1, 0);
         }
 
-        // .video--main-wrap의 transform: scale 조정
-        const videoWrapTop = videoWrap.getBoundingClientRect().top;
-        const videoWrapBottom = videoWrap.getBoundingClientRect().bottom;
+        showSection(currentIndex);
+    }
 
-        if (videoWrapBottom >= window.innerHeight && videoWrapTop <= window.innerHeight) {
-            const scrollProgress = (window.innerHeight - videoWrapTop) / screenHeightFifth;
-            const scaleValue = Math.min(Math.max(0.6 + (1 - 0.6) * scrollProgress, 0.6), 1);
-            const borderRValue = Math.min(Math.max(32 - (32 * scrollProgress), 0), 32);
-            videoWrap.style.transform = `scale(${scaleValue})`;
-            videoWrap.style.borderRadius = `${borderRValue}px`;
+    let touchStartY = 0;
+
+    function handleTouchStart(event) {
+        if (document.body.classList.contains('scroll--p')) return;
+        touchStartY = event.touches[0].clientY;
+    }
+
+    function handleTouchMove(event) {
+        if (document.body.classList.contains('scroll--p')) return;
+        if (!touchStartY) return;
+
+        const touchEndY = event.touches[0].clientY;
+        const deltaY = touchStartY - touchEndY;
+
+        if (Math.abs(deltaY) > 50) {
+            handleSwipe(deltaY);
+            touchStartY = 0;
         }
-    });
+    }
 
-    document.addEventListener('mousemove', function (e) {
-        const container = document.querySelector('.float-img-wrapper');
-        const range = 2;
+    window.addEventListener('wheel', handleScroll);
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
 
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
+    const videoMainWrap = document.querySelector('.video--main-wrap');
 
-        const moveX = (e.clientX - centerX) * range / centerX;
-        const moveY = (e.clientY - centerY) * range / centerY;
+    document.querySelector('.ms3-container').addEventListener('scroll', function() {
+        const scrollTop = this.scrollTop;
+        const scrollHeight = this.scrollHeight - this.clientHeight;
+        const startChange = scrollHeight / 3;
+        const endChange = scrollHeight * 2 / 3;
+        const changeRange = endChange - startChange;
 
-        container.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        const rect = videoMainWrap.getBoundingClientRect();
+        const topOffset = rect.top;
+
+        if (scrollTop > startChange && scrollTop < endChange) {
+            const progress = (scrollTop - startChange) / changeRange;
+            videoMainWrap.style.transform = `scale(${0.6 + 0.4 * progress})`;
+            videoMainWrap.style.borderRadius = `${32 - 32 * progress}px`;
+        } else if (scrollTop <= startChange) {
+            videoMainWrap.style.transform = 'scale(0.6)';
+            videoMainWrap.style.borderRadius = '32px';
+        } else if (scrollTop >= endChange) {
+            videoMainWrap.style.transform = 'scale(1)';
+            videoMainWrap.style.borderRadius = '0px';
+        }
+
+        if (topOffset <= 0) {
+            videoMainWrap.classList.add('show');
+        } else {
+            videoMainWrap.classList.remove('show');
+        }
     });
 });
-
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-    document.body.classList.add('scroll--p');
-};

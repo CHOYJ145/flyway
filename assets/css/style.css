@@ -1333,3 +1333,285 @@ body:not(#main) #app {
         letter-spacing: normal;
     }
 }
+
+/*new main*/
+.main-sec-wrapper {
+    position: relative;
+}
+
+#main .main-sec {
+    position: static;
+    display: none;
+    z-index: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: auto;
+    overflow: hidden;
+
+}
+
+#main .main-sec.on {
+    display: block;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+
+#main .main-sec.on.view {
+    opacity: 1;
+}
+
+#main .main-sec.main-sec--1 {
+    display: block;
+    position: relative;
+    z-index: 0;
+
+}
+
+.ms3-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/*main section 1*/
+.main-sec--1 .main-sec-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.sec--1-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-sec--1 .ani-text:nth-child(1) {
+    transition-delay: 200ms;
+}
+
+.main-sec--1 .ani-text:nth-child(2) {
+    transition-delay: 100ms;
+}
+
+.main-sec--1 .ani-text:nth-child(3) {
+    transition-delay: 0ms;
+}
+
+.cover--c {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--wh);
+    clip-path: circle(0% at 100% 100%);
+    transition: clip-path 800ms ease-in-out;
+}
+
+.main-sec--1.step .cover--c {
+    clip-path: circle(150% at 100% 100%);
+}
+
+/*main section 2*/
+.main-sec--2 .main-sec-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.sec--2-text {
+    position: relative;
+    z-index: 1;
+}
+
+.main-sec--2.on .sec--2-text .ani-text {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+
+.main-sec--2.on.view .sec--2-text .ani-text {
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+
+.main-sec--2.on.view .ani-text:nth-child(1) {
+    transition-delay: 100ms;
+}
+
+.main-sec--2.on.view .ani-text:nth-child(2) {
+    transition-delay: 200ms;
+}
+
+.main-sec--2.on.view .ani-text:nth-child(3) {
+    transition-delay: 300ms;
+}
+
+.main-sec--2.on.view .ani-text:nth-child(4) {
+    transition-delay: 400ms;
+}
+
+.main-sec--2 .float-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 600px;
+    width: 33.33%;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+    will-change: transform;
+    animation: float 4000ms ease-in-out infinite;
+}
+
+.main-sec--2 .float-img:nth-child(1) {
+    margin-top: -20%;
+    margin-left: 10%;
+}
+
+.main-sec--2 .float-img:nth-child(2) {
+    margin-top: -10%;
+    margin-left: -45%;
+}
+
+.main-sec--2 .float-img:nth-child(3) {
+    margin-top: 0;
+    margin-left: -10%;
+}
+
+.main-sec--2.on.view .float-img {
+    animation: float 4000ms ease-in-out infinite;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.main-sec--2.on.view .float-img:nth-child(1) {
+    transition-delay: 200ms;
+    animation-delay: 500ms;
+}
+
+.main-sec--2.on.view .float-img:nth-child(2) {
+    transition-delay: 100ms;
+    animation-delay: 400ms;
+}
+
+.main-sec--2.on.view .float-img:nth-child(3) {
+    transition-delay: 0ms;
+    animation-delay: 300ms;
+}
+
+/*main section 3*/
+.ms3-contents {
+    padding-top: 60px;
+}
+
+.ms3-content {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.row-img-inner {
+    display: flex;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.main-sec--3.on.view .row-img {
+    animation: slideIn 800ms forwards;
+}
+
+.main-sec--3.on.view .row-img:nth-child(1) {
+    animation-delay: 200ms;
+}
+
+.main-sec--3.on.view .row-img:nth-child(2) {
+    animation-delay: 800ms;
+}
+
+.main-sec--3.on.view .row-img:nth-child(3) {
+    animation-delay: 1400ms;
+}
+
+.main-sec--3.on.view .video--main-wrap {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    transform: scale(0.6);
+    transform-origin: bottom;
+    border-radius: 32px;
+    overflow: hidden;
+    transition: none;
+}
+
+.main-sec--3.on.view .video--main-wrap .cover--main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-size: 3px 3px;
+    background-image: linear-gradient(to right, black 1px, transparent 1px),
+    linear-gradient(to bottom, black 1px, transparent 1px);
+
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+
+.d-text {
+    margin-bottom: 60px;
+    font-size: 78px;
+    font-weight: var(--800);
+    line-height: 120%;
+    letter-spacing: -0.78px;
+    text-align: center;
+
+    opacity: 0;
+    transition: opacity 300ms 300ms ease-in-out;
+}
+
+@media screen and (max-width: 1024px) {
+    .d-text {
+        margin: 0 auto 40px;
+        max-width: 310px;
+        font-size: 40px;
+        font-weight: var(--700);
+        line-height: 120%;
+        letter-spacing: -0.8px;
+    }
+}
+
+.d-btn {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: transform 300ms 500ms ease-in-out, opacity 200ms 400ms ease-in-out;
+}
+
+.main-sec--3.on.view .video--main-wrap.show .cover--main {
+    opacity: 1;
+}
+
+.main-sec--3.on.view .video--main-wrap.show .cover--main .d-text {
+    opacity: 1;
+}
+
+.main-sec--3.on.view .video--main-wrap.show .d-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
