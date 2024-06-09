@@ -9,5 +9,6 @@
 
     <?= css('assets/css/style.css') ?>
     <?= css('assets/css/add.css') ?>
+    <?= css('assets/css/add.js') ?>
 </head>
 <body>
