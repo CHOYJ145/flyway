@@ -2,6 +2,26 @@ Title: STORY
 
 ----
 
+<<<<<<< HEAD
+=======
+HeadlineKor: 재미를 찾습니다, 유저를 만납니다
+
+----
+
+HeadlineEng: Seeking Fun, Meeting Users
+
+----
+
+Desc: 스스로 찾아낸 재미를, 가장 잘 만들 수 있는 개발자들이 모여
+플레이어들에게 새로운 경험을 줍니다
+
+----
+
+Type: all, news, youtube
+
+----
+
+>>>>>>> 4d844c87dca47e17a740cb88064b18e346cc2cc7
 Show: true
 
 ----
