@@ -13,7 +13,7 @@
                             <?php foreach ($item->files()->filterBy('template', 'thumbnail-game-pc') as $file): ?>
                                 <img class="game-thumbnail--pc" src="<?= $file->url() ?>" alt="<?= $item->title() ?> | <?= $site->title() ?>">
                             <?php endforeach ?>
-                            <?php foreach ($item->files()->filterBy('template', 'thumbnail-game-m') as $file): ?>
+                            <?php foreach ($item->files()->filterBy('templat e', 'thumbnail-game-m') as $file): ?>
                                 <img class="game-thumbnail--m" src="<?= $file->url() ?>" alt="<?= $item->title() ?> | <?= $site->title() ?>">
                             <?php endforeach ?>
                         </a>
