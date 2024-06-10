@@ -2,6 +2,23 @@ window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 };
 
+document.addEventListener("DOMContentLoaded", function() {
+    let previousWidth = window.innerWidth;
+    function setScreenSize() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    function handleResize() {
+        const currentWidth = window.innerWidth;
+        if (currentWidth !== previousWidth) {
+            previousWidth = currentWidth;
+            setScreenSize();
+        }
+    }
+    window.addEventListener('resize', handleResize);
+    setScreenSize();
+});
+
 $('.nav-btn').on('click', function () {
     $(this).toggleClass('chk');
     if ($(this).hasClass('chk')) {
@@ -26,13 +43,20 @@ $('.benefit-btn-list .benefit-btn').on('click', function () {
 });
 
 $('.benefit-btn.m').on('click', function () {
-    const itemParent = $(this).parents('.benefit-cont');
+    const $this = $(this);
+    const itemParent = $this.parents('.benefit-cont');
     const thisIdx = itemParent.index();
-    if (!$(this).hasClass('on')) {
-        $('.benefit-btn.m').not($(this)).removeClass('on');
-        $(this).addClass('on');
-        $('.benefit-btn.m').not($(this)).siblings('.benefit-info').slideUp();
-        $(this).siblings('.benefit-info').slideDown();
+    if (!$this.hasClass('on')) {
+        $('.benefit-btn.m').not($this).removeClass('on');
+        $this.addClass('on');
+        $('.benefit-btn.m').not($this).siblings('.benefit-info').slideUp();
+
+        $this.siblings('.benefit-info').slideDown(300, function () {
+            $('html, body').animate({
+                scrollTop: itemParent.offset().top - 72
+            }, 300);
+        });
+
         $('.benefit-cont').removeClass('on');
         $('.benefit-cont').eq(thisIdx).addClass('on');
         $('.benefit-btn-list .benefit-btn').removeClass('on');

@@ -8,7 +8,7 @@
         ?>
         <div class="main-sec-inner">
             <video class="video video--top" playsinline autoplay muted controlslist="nodownload">
-                <source src="<?= $topPCUrl ?>" type="video/webm">
+                <source src="<?= $topPCUrl ?>" type="video/mp4">
             </video>
             <div class="sec--1-text ani-text-wrapper">
                 <div class="ani-text">INSPIRATION</div>
@@ -24,20 +24,39 @@
                 const topPCUrl = <?= json_encode($topPCUrl) ?>;
                 const topMUrl = <?= json_encode($topMUrl) ?>;
 
+                let previousWidth = window.innerWidth;
+
                 function loadVideoSource() {
                     const topElement = document.querySelector('.video--top source');
                     const currentWidth = window.innerWidth;
 
-                    topElement.src = currentWidth <= 1024 ? topMUrl : topPCUrl;
+                    if (currentWidth <= 1024) {
+                        topElement.src = topMUrl;
+                    } else {
+                        topElement.src = topPCUrl;
+                    }
+
                     topVideo.load();
                 }
 
-                window.addEventListener('load', loadVideoSource);
-                window.addEventListener('resize', loadVideoSource);
+                function handleResizeOrLoad() {
+                    const currentWidth = window.innerWidth;
+                    if (currentWidth !== previousWidth) {
+                        previousWidth = currentWidth;
+                        loadVideoSource();
+                    }
+                }
+
+                window.addEventListener('load', handleResizeOrLoad);
+                window.addEventListener('resize', handleResizeOrLoad);
 
                 let actionExecuted = false;
+                let videoEnded = false; // 비디오가 종료되었는지 여부를 추적
 
                 topVideo.addEventListener('timeupdate', function() {
+                    if (videoEnded) return; // 비디오가 종료된 경우 이벤트 무시
+
+                    console.log('Time update:', topVideo.currentTime);
                     const timeRemaining = topVideo.duration - topVideo.currentTime;
 
                     if (timeRemaining <= 1.2 && !actionExecuted) {
@@ -49,56 +68,16 @@
                     }
                 });
 
-                topVideo.onended = function() {
+                topVideo.addEventListener('ended', function() {
                     topVideo.pause();
-                };
+                    topVideo.currentTime = 3;
+                    videoEnded = true; // 비디오가 종료되었음을 표시
+                });
 
-                //
-                // function coverAct() {
-                //     const cover = document.querySelector('.cover--c');
-                //     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                //
-                //     const startScroll = window.innerHeight; // 100vh
-                //     const endScroll = window.innerHeight * 2; // 200vh
-                //     const maxOffset = 150; // 기준
-                //
-                //     if (scrollTop < startScroll) {
-                //         cover.style.clipPath = `circle(0% at 100% 100%)`;
-                //     } else if (scrollTop > endScroll) {
-                //         cover.style.clipPath = `circle(${maxOffset}% at 100% 100%)`;
-                //     } else {
-                //         const scrollFraction = (scrollTop - startScroll) / (endScroll - startScroll);
-                //         const offset = maxOffset * scrollFraction;
-                //         cover.style.clipPath = `circle(${offset}% at 100% 100%)`;
-                //     }
-                // }
-                //
-
+                loadVideoSource();
             });
+
         </script>
-    </section>
-    <section class="main-sec main-sec--2">
-        <div class="main-sec-inner">
-            <div class="float-img-wrapper">
-                <div class="float-img-inner">
-                    <div class="float-img img-cover">
-                        <img src="<?= url('assets/img/1.jpg') ?>">
-                    </div>
-                    <div class="float-img img-cover">
-                        <img src="<?= url('assets/img/2.jpg') ?>">
-                    </div>
-                    <div class="float-img img-cover">
-                        <img src="<?= url('assets/img/3.jpg') ?>">
-                    </div>
-                </div>
-            </div>
-            <div class="sec--2-text ani-text-wrapper">
-                <div class="ani-text">SEEKING</div>
-                <div class="ani-text">FUN,</div>
-                <div class="ani-text">MEETING</div>
-                <div class="ani-text">USERS!</div>
-            </div>
-        </div>
     </section>
     <section class="main-sec main-sec--3">
         <div class="main-sec-inner ms3-container">
@@ -133,9 +112,10 @@
                                 <img src="<?= url('assets/img/gi-2.jpg') ?>">
                             </div>
                             <div class="gi-text">
-                                <div class="title">Seeking Fun</div>
-                                <div class="sub">재미를 찾습니다</div>
-                                <p>우리는 잠재력을 가진 개발자들의 열망을 기반으로 플레이어들에게 새로운 경험을 선사하는 게임 회사입니다. 플랫폼, 장르, 스타일의 제약을 뛰어넘어, 다양한 Creative 를 탐구하며 게임을 제작합니다.</p>
+                                <div class="title">Meeting Users</div>
+                                <div class="sub">유저를 만납니다</div>
+                                <p>결국 게임은 유저를 만나야 완성이 된다고 생각합니다.<br>
+                                    유저의 반응을 통해서 우리는 우리의 선택에 대한 확신을 얻을 수 있게 되고, 유저들이 쌓아가는 다양한 데이터들을 통해 시장에서 살아남을 수 있는 경험치를 얻게 됩니다.</p>
                             </div>
                         </div>
                     </div>
@@ -161,24 +141,39 @@
                         </div>
                     </div>
                     <script>
-                        const videoPCUrl = <?= json_encode($videoPCUrl) ?>;
-                        const videoMUrl = <?= json_encode($videoMUrl) ?>;
-                        function updateVideoSource() {
-                            const videoElement = document.querySelector('.video--main source');
-                            const videoElementParent = document.querySelector('.video--main');
-                            const currentWidth = window.innerWidth;
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const videoPCUrl = <?= json_encode($videoPCUrl) ?>;
+                            const videoMUrl = <?= json_encode($videoMUrl) ?>;
+                            let previousWidth = window.innerWidth;
 
-                            if (currentWidth <= 1024) {
-                                videoElement.src = videoMUrl;
-                            } else {
-                                videoElement.src = videoPCUrl;
+                            function updateVideoSource() {
+                                const videoElement = document.querySelector('.video--main source');
+                                const videoElementParent = document.querySelector('.video--main');
+                                const currentWidth = window.innerWidth;
+
+                                if (currentWidth <= 1024) {
+                                    console.log('Setting mobile video URL:', videoMUrl);
+                                    videoElement.src = videoMUrl;
+                                } else {
+                                    console.log('Setting PC video URL:', videoPCUrl);
+                                    videoElement.src = videoPCUrl;
+                                }
+
+                                videoElementParent.load();
+                                console.log('Video source updated');
                             }
 
-                            videoElementParent.load();
-                        }
+                            function handleResizeOrLoad() {
+                                const currentWidth = window.innerWidth;
+                                if (currentWidth !== previousWidth) {
+                                    previousWidth = currentWidth;
+                                    updateVideoSource();
+                                }
+                            }
 
-                        window.addEventListener('load', updateVideoSource);
-                        window.addEventListener('resize', updateVideoSource);
+                            updateVideoSource(); // 페이지가 로드될 때 한 번 호출
+                            window.addEventListener('resize', handleResizeOrLoad); // 리사이즈 이벤트 처리
+                        });
                     </script>
                 </div>
             </div>

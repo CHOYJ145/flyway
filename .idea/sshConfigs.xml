@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="54.180.176.254" id="54b949a1-f390-4f40-ac30-2f7617b0c1b7" keyPath="$PROJECT_DIR$/../../flyway.pem" port="22" nameFormat="DESCRIPTIVE" username="ec2-user" useOpenSSHConfig="false" />
+    </configs>
+  </component>
+</project>
