@@ -641,6 +641,7 @@ section.act .float-img {
 
 @media screen and (max-width: 1024px) {
     .sec--1-text > div {
+        color: var(--bk);
         font-size: 40px;
         font-weight: var(--900);
         line-height: 120%;
@@ -715,14 +716,18 @@ section.act .float-img {
 @media screen and (min-width: 1920px) {
     .game-info--main {
         max-width: none;
-        padding: 0 400px;
+        padding: 64px 400px 30px;
     }
 }
 
 @media screen and (max-width: 1024px) {
     .game-info--main {
-        display: block;
-        padding: 60px 20px;
+        flex-wrap: nowrap;
+        max-width: none;
+        column-gap: 40px;
+        padding: 60px 20px 20px;
+        width: 200%;
+        transition: transform 300ms ease-in-out;
     }
 }
 
@@ -738,6 +743,25 @@ section.act .float-img {
 
 .main-sec--3.on .gi-col:last-child {
     transition: transform 300ms 1200ms ease-in-out, opacity 300ms 1200ms ease-in-out;
+}
+
+@media screen and (max-width: 1024px) {
+    .gi-col {
+        width: calc(50% - 20px);
+        flex: none;
+
+        opacity: 0;
+        transform: translateY(0);
+    }
+
+    .main-sec--3.on .gi-col:first-child {
+        transition: opacity 300ms ease-in-out;
+    }
+
+    .main-sec--3.on .gi-col:last-child {
+        transition: opacity 300ms ease-in-out;
+    }
+
 }
 
 .main-sec--3.on.view .gi-col {
@@ -771,7 +795,6 @@ section.act .float-img {
     .gi-col:first-child {
         display: flex;
         flex-direction: column-reverse;
-        padding-bottom: 120px;
     }
 
     .gi-img {
@@ -1061,16 +1084,35 @@ section.act .float-img {
 }
 
 .ms3-content:first-child {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 }
 
-.ms3-content:first-child::-webkit-scrollbar {
-    display: none;
+/*.ms3-content:first-child {*/
+/*    -ms-overflow-style: none;*/
+/*    scrollbar-width: none;*/
+/*}*/
+
+/*.ms3-content:first-child::-webkit-scrollbar {*/
+/*    display: none;*/
+/*}*/
+
+@media screen and (max-width: 1024px) {
+    .ms3-content:first-child {
+        overflow-x: auto;
+        scroll-behavior: smooth;
+    }
 }
 
-.row-img-inner {
-    display: flex;
+@media screen and (min-width: 1024px) {
+    .ms3-content:first-child {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .ms3-content:first-child::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 @keyframes slideIn {
@@ -1078,6 +1120,23 @@ section.act .float-img {
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.row-img-inner {
+    display: flex;
+}
+
+.main-sec--3 .row-img {
+    cursor: pointer;
 }
 
 .main-sec--3.on.view .row-img {

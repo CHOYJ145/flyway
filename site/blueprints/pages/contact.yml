@@ -2,7 +2,7 @@ title: contact
 
 columns:
   util:
-    width: 1/3
+    width: 1/2
     sections:
       fields:
         type: fields
@@ -10,13 +10,12 @@ columns:
           show:
             label: page active
             type: toggle
+            width: 1/2
             option:
               - off
               - on
-  main:
-    width: 2/3
-    sections:
       fields1:
+        label: top
         type: fields
         fields:
           map:
@@ -28,44 +27,59 @@ columns:
           addrEn:
             label: 주소 영문
             type: text
-
-
-
-
           contacttype:
             label: 연락처 타입
             type: text
+            width: 1/3
           contactnumber:
             label: 연락처
             type: text
-
-
-
-
+            width: 2/3
+  main:
+    width: 1/2
+    sections:
+      subway:
+        label: subway
+        type: fields
+        fields:
           subwayline:
             label: 지하철 노선
             type: text
+            width: 1/2
           subwaystation:
             label: 하차 역
             type: text
+            width: 1/2
           subwaydirections:
             label: 지하철에서 오는 길
             type: text
 
+          line1:
+            type: line
 
-
+      bus:
+        label: bus
+        type: fields
+        fields:
           mainbus:
             label: 간선
             type: text
+            width: 1/2
           intercitybus:
             label: 시외
             type: text
+            width: 1/2
           busstation:
             label: 버스정류장
             type: text
 
+          line2:
+            type: line
 
-
+      vehicle:
+        label: vehicle
+        type: fields
+        fields:
           vehicleparking:
             label: 승용차 주차장
             type: text

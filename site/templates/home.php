@@ -51,12 +51,11 @@
                 window.addEventListener('resize', handleResizeOrLoad);
 
                 let actionExecuted = false;
-                let videoEnded = false; // 비디오가 종료되었는지 여부를 추적
+                let videoEnded = false;
 
                 topVideo.addEventListener('timeupdate', function() {
-                    if (videoEnded) return; // 비디오가 종료된 경우 이벤트 무시
+                    if (videoEnded) return;
 
-                    console.log('Time update:', topVideo.currentTime);
                     const timeRemaining = topVideo.duration - topVideo.currentTime;
 
                     if (timeRemaining <= 1.2 && !actionExecuted) {
@@ -70,8 +69,8 @@
 
                 topVideo.addEventListener('ended', function() {
                     topVideo.pause();
-                    topVideo.currentTime = 3;
-                    videoEnded = true; // 비디오가 종료되었음을 표시
+                    // topVideo.currentTime = 3;
+                    videoEnded = true;
                 });
 
                 loadVideoSource();
@@ -82,9 +81,27 @@
     <section class="main-sec main-sec--3">
         <div class="main-sec-inner ms3-container">
             <div class="ms3-contents">
-                <div class="ms3-content">
+                <div class="ms3-content ms3-content--1">
                     <div class="row-img-wrapper sec3-swiper">
                         <div class="row-img-inner">
+                            <div class="row-img img-cover">
+                                <img src="<?= url('assets/img/1.jpg') ?>">
+                            </div>
+                            <div class="row-img img-cover">
+                                <img src="<?= url('assets/img/2.jpg') ?>">
+                            </div>
+                            <div class="row-img img-cover">
+                                <img src="<?= url('assets/img/3.jpg') ?>">
+                            </div>
+                            <div class="row-img img-cover">
+                                <img src="<?= url('assets/img/1.jpg') ?>">
+                            </div>
+                            <div class="row-img img-cover">
+                                <img src="<?= url('assets/img/2.jpg') ?>">
+                            </div>
+                            <div class="row-img img-cover">
+                                <img src="<?= url('assets/img/3.jpg') ?>">
+                            </div>
                             <div class="row-img img-cover">
                                 <img src="<?= url('assets/img/1.jpg') ?>">
                             </div>
@@ -141,6 +158,65 @@
                         </div>
                     </div>
                     <script>
+                        let startY;
+                        let scrollContainer = document.querySelector('.ms3-content--1');
+                        let scrollContent = document.querySelector('.game-info--main');
+                        let currentSlide = 0;
+                        const totalSlides = document.querySelectorAll('.gi-col').length;
+
+                        scrollContainer.addEventListener('touchstart', function(e) {
+                            startY = e.touches[0].pageY;
+                        });
+
+                        scrollContainer.addEventListener('touchmove', function(e) {
+                            let moveY = e.touches[0].pageY - startY;
+
+                            if ((currentSlide === 0 && moveY > 0 && lastSlideReached) ||
+                                (currentSlide === totalSlides - 1 && moveY < 0 && lastSlideReached)) {
+                                // Allow default scrolling behavior if at the start or end of the slides and another swipe is detected
+                                return;
+                            }
+
+                            // Prevent vertical scroll
+                            e.preventDefault();
+                            scrollContainer.style.overflowY = 'hidden';
+
+                            if (moveY > 50) { // Swipe down
+                                slidePrevious();
+                                startY = e.touches[0].pageY; // Prevent continuous triggering
+                            } else if (moveY < -50) { // Swipe up
+                                slideNext();
+                                startY = e.touches[0].pageY; // Prevent continuous triggering
+                            }
+                        });
+
+                        function slideNext() {
+                            if (currentSlide < totalSlides - 1) {
+                                currentSlide++;
+                                updateSlide();
+                                lastSlideReached = false;
+                            } else {
+                                lastSlideReached = true;
+                                scrollContainer.style.overflowY = 'auto'; // Enable scrolling when at the last slide and next swipe is detected
+                            }
+                        }
+
+                        function slidePrevious() {
+                            if (currentSlide > 0) {
+                                currentSlide--;
+                                updateSlide();
+                                lastSlideReached = false;
+                            } else {
+                                lastSlideReached = true;
+                                scrollContainer.style.overflowY = 'auto'; // Enable scrolling when at the first slide and next swipe is detected
+                            }
+                        }
+
+                        function updateSlide() {
+                            scrollContent.style.transform = `translateX(-${currentSlide * 100 / totalSlides}%)`;
+                            scrollContainer.style.overflowY = 'hidden'; // Disable scrolling when sliding between .gi-col elements
+                        }
+
                         document.addEventListener("DOMContentLoaded", function() {
                             const videoPCUrl = <?= json_encode($videoPCUrl) ?>;
                             const videoMUrl = <?= json_encode($videoMUrl) ?>;
@@ -152,15 +228,12 @@
                                 const currentWidth = window.innerWidth;
 
                                 if (currentWidth <= 1024) {
-                                    console.log('Setting mobile video URL:', videoMUrl);
                                     videoElement.src = videoMUrl;
                                 } else {
-                                    console.log('Setting PC video URL:', videoPCUrl);
                                     videoElement.src = videoPCUrl;
                                 }
 
                                 videoElementParent.load();
-                                console.log('Video source updated');
                             }
 
                             function handleResizeOrLoad() {
@@ -173,6 +246,117 @@
 
                             updateVideoSource(); // 페이지가 로드될 때 한 번 호출
                             window.addEventListener('resize', handleResizeOrLoad); // 리사이즈 이벤트 처리
+
+
+
+                            const section = document.querySelector('.main-sec--3');
+                            const imgWrapper = document.querySelector('.row-img-inner');
+                            const imgs = Array.from(document.querySelectorAll('.row-img'));
+                            let isSliding = false;
+                            let animationFrameId;
+                            let currentPosition = 0;
+                            let isPaused = false;
+
+                            function checkWindowSize() {
+                                return window.innerWidth >= 1024;
+                            }
+
+                            // 이미지 클론 생성
+                            function cloneImages() {
+                                imgs.forEach(img => {
+                                    const clone = img.cloneNode(true);
+                                    imgWrapper.appendChild(clone);
+                                });
+                            }
+
+                            function animate() {
+                                if (!isPaused) {
+                                    const totalWidth = imgWrapper.scrollWidth / 2;
+                                    currentPosition -= 1;
+                                    if (currentPosition <= -totalWidth) {
+                                        currentPosition = 0;
+                                    }
+                                    imgWrapper.style.transform = `translateX(${currentPosition}px)`;
+                                }
+                                animationFrameId = requestAnimationFrame(animate);
+                            }
+
+                            function startSliding() {
+                                isPaused = false;
+                                if (!animationFrameId) {
+                                    animationFrameId = requestAnimationFrame(animate);
+                                }
+                            }
+
+                            function stopSliding() {
+                                cancelAnimationFrame(animationFrameId);
+                                animationFrameId = null;
+                                imgWrapper.style.transform = `translateX(${currentPosition}px)`;
+                            }
+
+                            function initSlider() {
+                                if (!isSliding) {
+                                    cloneImages(); // 클론 이미지를 생성
+                                    setTimeout(startSliding, 1500); // 1500ms 후에 슬라이드 애니메이션 시작
+                                    isSliding = true;
+                                }
+                            }
+
+                            function pauseSliding() {
+                                isPaused = true;
+                            }
+
+                            function resumeSliding() {
+                                isPaused = false;
+                                if (!animationFrameId) {
+                                    animationFrameId = requestAnimationFrame(animate);
+                                }
+                            }
+
+                            function resetSliding() {
+                                stopSliding();
+                                isSliding = false;
+                                if (checkWindowSize()) {
+                                    initSlider();
+                                }
+                            }
+
+                            // Intersection Observer 설정
+                            const observer = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        if (checkWindowSize()) {
+                                            section.classList.add('on', 'view');
+                                            resetSliding(); // 애니메이션을 다시 시작하도록 설정
+                                        }
+                                    } else {
+                                        section.classList.remove('on', 'view');
+                                        stopSliding();
+                                    }
+                                });
+                            });
+
+                            observer.observe(section);
+
+                            // 마우스 오버 및 리브 이벤트 설정
+                            imgWrapper.addEventListener('mouseenter', pauseSliding);
+                            imgWrapper.addEventListener('mouseleave', resumeSliding);
+
+                            // 윈도우 크기 변화 감지
+                            window.addEventListener('resize', () => {
+                                if (checkWindowSize()) {
+                                    if (section.classList.contains('on') && section.classList.contains('view')) {
+                                        resetSliding();
+                                    }
+                                } else {
+                                    stopSliding();
+                                }
+                            });
+
+                            // 초기 상태 확인
+                            if (checkWindowSize()) {
+                                initSlider();
+                            }
                         });
                     </script>
                 </div>

@@ -1120,8 +1120,11 @@
                 </div>
             </div>
             <div class="recruit-sec">
+                <?php
+                $totalChildren = $page->children()->count();
+                ?>
                 <div class="recruit-sec-title">
-                    <div class="p-text"><span>6</span>개의 채용 공고</div>
+                    <div class="p-text"><span><?= $totalChildren ?></span>개의 채용 공고</div>
                     <div class="btn btn--fly filter-btn m">Filter</div>
                 </div>
                 <div class="recruit-tab-list-wrapper">
@@ -1205,7 +1208,31 @@
                         </div>
                     </div>
                     <div class="recruit-cont-list">
-                        <div class="recruit-cont" data-d1="art" data-d2="p-1/c-1/t-1/">
+                        <?php foreach ($page->children()->listed() as $item): ?>
+                            <div class="recruit-cont" data-d1="<?= $item->category() ?>" data-d2="<?= $item->filter1() ?>/<?= $item->filter2() ?>/<?= $item->filter3() ?>">
+                                <a class="recruit-cont-title" href="<?= $item->contactLink() ?>" target="_blank"><?= $item->title() ?></a>
+                                <div class="recruit-tag-list">
+                                    <div class="recruit-tag">
+                                        <?php
+                                        $filter3Value = $item->filter3()->value();
+                                        if ($filter3Value == 't1') {
+                                            echo '정규직';
+                                        } elseif ($filter3Value == 't2') {
+                                            echo '계약직';
+                                        } else {
+                                            echo '기타';
+                                        }
+                                        ?>
+                                    </div>
+                                    <?php $tags = $item->tag()->split();
+                                    foreach ($tags as $tag):?>
+                                        <div class="recruit-tag"><?php echo html($tag); ?></div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+
+                        <div class="recruit-cont" data-d1="design" data-d2="p-2/c-2/t-2">
                             <a class="recruit-cont-title" href="#none" target="_blank">Cinematic Environment Artist</a>
                             <div class="recruit-tag-list">
                                 <div class="recruit-tag">정규직</div>
@@ -1215,17 +1242,7 @@
                                 <div class="recruit-tag">Server</div>
                             </div>
                         </div>
-                        <div class="recruit-cont" data-d1="design" data-d2="p-2/c-2/t-2/">
-                            <a class="recruit-cont-title" href="#none" target="_blank">Cinematic Environment Artist</a>
-                            <div class="recruit-tag-list">
-                                <div class="recruit-tag">정규직</div>
-                                <div class="recruit-tag">7년차 이상</div>
-                                <div class="recruit-tag">3D</div>
-                                <div class="recruit-tag">Functional</div>
-                                <div class="recruit-tag">Server</div>
-                            </div>
-                        </div>
-                        <div class="recruit-cont" data-d1="dev" data-d2="p-1/c-3/t-2/">
+                        <div class="recruit-cont" data-d1="dev" data-d2="p-1/c-3/t-2">
                             <a class="recruit-cont-title" href="#none" target="_blank">Cinematic Environment Artist</a>
                             <div class="recruit-tag-list">
                                 <div class="recruit-tag">정규직</div>

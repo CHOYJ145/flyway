@@ -1,0 +1,54 @@
+title: people detail
+
+columns:
+  info:
+    width: 1/2
+    sections:
+      fields:
+        type: fields
+        fields:
+          category:
+            label: category
+            type: select
+            options:
+              bs: Business & Service
+              design: Game Design
+              art: Art
+              dev: Development Management
+          filter1:
+            label: project
+            type: select
+            width: 1/2
+            options:
+              p-1: Flyway Games
+              p-2: Trinity Survivors
+          filter2:
+            label: 경력
+            type: select
+            width: 1/2
+            options:
+              c-1: 경력
+              c-2: 신입
+              c-3: 무관
+          filter3:
+            label: 경력
+            type: select
+            width: 1/2
+            options:
+              t-1: 정규직
+              t-2: 계약직
+          tag:
+            label: tag
+            type: tags
+
+
+  link:
+    width: 1/2
+    sections:
+      fields1:
+        type: fields
+        fields:
+          contactLink:
+            label: link
+            type: url
+

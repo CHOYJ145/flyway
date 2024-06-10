@@ -64,31 +64,97 @@ $('.benefit-btn.m').on('click', function () {
     }
 });
 
-$('.recruit-tab').on('click', function () {
-    $('.recruit-tab').not($(this)).removeClass('on');
-    $(this).addClass('on');
-    $('.recruit-filter').removeClass('on');
-    $('.recruit-filter--all').addClass('on');
-});
+// $('.recruit-tab').on('click', function () {
+//     $('.recruit-tab').not($(this)).removeClass('on');
+//     $(this).addClass('on');
+//     $('.recruit-filter').removeClass('on');
+//     $('.recruit-filter--all').addClass('on');
+// });
 
 $(document).ready(function() {
+    let selectedTab = 'all';
+    let selectedFilters = {
+        p: [],
+        c: [],
+        t: []
+    };
+
+    function filterContent() {
+        let visibleCount = 0;
+        $('.recruit-cont').each(function() {
+            let $content = $(this);
+            let contentTab = $content.data('d1');
+            let contentFilters = $content.data('d2').split('/');
+
+            let isTabMatch = selectedTab === 'all' || selectedTab === contentTab;
+            let isProjectMatch = selectedFilters.p.length === 0 || selectedFilters.p.some(f => contentFilters.includes(f));
+            let isCareerMatch = selectedFilters.c.length === 0 || selectedFilters.c.some(f => contentFilters.includes(f));
+            let isTypeMatch = selectedFilters.t.length === 0 || selectedFilters.t.some(f => contentFilters.includes(f));
+
+            if (isTabMatch && isProjectMatch && isCareerMatch && isTypeMatch) {
+                $content.show();
+                visibleCount++;
+            } else {
+                $content.hide();
+            }
+        });
+
+        $('.p-text > span').text(visibleCount);
+    }
+
+    $('.recruit-tab').on('click', function() {
+        selectedTab = $(this).data('tab');
+        $('.recruit-tab').removeClass('on');
+        $(this).addClass('on');
+
+        // 필터 리셋
+        selectedFilters = {
+            p: [],
+            c: [],
+            t: []
+        };
+        $('.recruit-filter').removeClass('on');
+        $('.recruit-filter--all').addClass('on');
+
+        filterContent();
+    });
+
     function handleFilterClick(filterList) {
         filterList.on('click', '.recruit-filter', function() {
             let $this = $(this);
+            let filterType = $this.data('filter').split('-')[0];
+            let filterValue = $this.data('filter');
 
             if ($this.hasClass('recruit-filter--all')) {
+                selectedFilters[filterType] = [];
                 $this.closest('.recruit-filter-list').find('.recruit-filter').removeClass('on');
                 $this.addClass('on');
             } else {
                 $this.toggleClass('on');
-                $this.closest('.recruit-filter-list').find('.recruit-filter--all').removeClass('on');
+                let allFilter = $this.closest('.recruit-filter-list').find('.recruit-filter--all');
+
+                if ($this.hasClass('on')) {
+                    selectedFilters[filterType].push(filterValue);
+                } else {
+                    selectedFilters[filterType] = selectedFilters[filterType].filter(value => value !== filterValue);
+                }
+
+                if (selectedFilters[filterType].length === 0) {
+                    allFilter.addClass('on');
+                } else {
+                    allFilter.removeClass('on');
+                }
             }
+
+            filterContent();
         });
     }
 
     $('.recruit-filter-list').each(function() {
         handleFilterClick($(this));
     });
+
+    filterContent();
 });
 
 $('.panel-btn').on('click', function () {

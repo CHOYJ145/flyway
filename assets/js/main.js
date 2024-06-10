@@ -6,12 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function showSection(index) {
         sections.forEach((section, idx) => {
             if (idx === index) {
-                // section.style.display = 'block';
-                // section.classList.add('on');
-                // setTimeout(() => {
-                //     section.classList.add('view');
-                // }, 500);
-
                 if (idx == 1) {
                     setTimeout(() => {
                         section.style.display = 'block';
@@ -162,4 +156,14 @@ document.addEventListener('DOMContentLoaded', function () {
             videoMainWrap.classList.remove('show');
         }
     });
+});
+
+let previousWidth = window.innerWidth;
+
+window.addEventListener('resize', function() {
+    const currentWidth = window.innerWidth;
+    if (currentWidth !== previousWidth) {
+        previousWidth = currentWidth;
+        window.location.reload();
+    }
 });
