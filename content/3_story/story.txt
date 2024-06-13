@@ -6,7 +6,7 @@ Show: true
 
 ----
 
-Head-headlinekor: 재미를 찾습니다, 유저를 만납니다
+Headlinekor: 재미를 찾습니다, 유저를 만납니다
 
 ----
 

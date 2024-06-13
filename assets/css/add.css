@@ -109,6 +109,7 @@ hr {
     align-items: flex-start;
     gap: 8px;
     align-self: stretch;
+    margin-bottom: 40px;
 }
 
 .story-button {
@@ -128,11 +129,25 @@ hr {
     text-transform: capitalize;
 }
 
+.story-button.on {
+    border: 3px solid var(--sky);
+    color: var(--sky);
+}
+
 .story-item {
-    margin: 40px 0px 80px 0px;
+    margin-top: 40px;
     display: grid;
     gap: 60px 20px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: 80px;
+}
+
+.story-item.off {
+    display: none;
+}
+
+.story-item img {
+    border-radius: 8px;
 }
 
 .story-item-type {
@@ -155,6 +170,7 @@ hr {
     line-height: 160%; /* 19.2px */
     text-transform: uppercase;
     text-align: center;
+    margin-top: 80px;
     
 }
 .story-item-text {
@@ -176,6 +192,10 @@ hr {
     align-self: stretch;
 }
 
+.expand-button.off {
+    display: none;
+}
+
 .expand-button {
     display: flex;
     padding: 6px 16px;
@@ -192,10 +212,6 @@ hr {
     line-height: 160%; /* 25.6px */
     text-align: center;
 }
-
-
-
-
 
 @media screen and (max-width: 1024px) {
 
@@ -245,4 +261,50 @@ hr {
         font-weight: 700;
         line-height: 160%; /* 22.4px */
     }
+
+    .story-heading {
+        color: var(--WH, #FEFEFE);
+        font-feature-settings: 'ss01' on;
+        /* T2/Bold */
+        font-family: "Wanted Sans";
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%; /* 33.6px */
+        letter-spacing: -0.24px;
+        }
+
+    .story-desc {
+        color: var(--Grey-20, #DDD);
+        font-feature-settings: 'ss01' on;
+        /* B2/Medium */
+        font-family: "Wanted Sans";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; /* 22.4px */
+        margin-bottom: 0px;
+    }
+
+    .story-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin-bottom: 40px;
+    }
+
+    .story-item img {
+        margin-bottom: 16px;
+    }
+
+    .story-buttons {
+        margin: 40px 0px;
+    }
+
+    .story-item-text {
+        display: flex;
+        gap: 1%;
+    }
+
+
 }

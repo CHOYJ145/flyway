@@ -1,5 +1,11 @@
-// var button = document.getElementsByClassName("story-button");
-//
-// button.addEventListener("click", function() {
-//     this.style.color = "#8BDEDA";
-// })
+$('.story-button').on('click', function() {
+//    let selectedButton = 'all';
+//    selectedButton = $(this).data('tab');
+    $('.story-button').removeClass('on');
+    $(this).addClass('on');
+});
+
+$('.expand-button').on('click', function() {
+        $('.story-item.off').removeClass('off');
+        $('.expand-button').addClass('off');
+    });
