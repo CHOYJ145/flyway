@@ -79,7 +79,7 @@ hr {
     margin: auto;
 }
 
-.story-heading {
+.story-header {
     color: var(--WH, #FEFEFE);
     font-feature-settings: 'ss01' on;
     /* T1/Semibold */
@@ -262,7 +262,7 @@ hr {
         line-height: 160%; /* 22.4px */
     }
 
-    .story-heading {
+    .story-header {
         color: var(--WH, #FEFEFE);
         font-feature-settings: 'ss01' on;
         /* T2/Bold */

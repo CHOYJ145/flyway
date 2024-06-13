@@ -2,9 +2,9 @@
 <?= snippet('nav') ?>
     <div id="app">
         <div class="story-content">
-            <div class="story-heading">
-                <div><?= $page->headlinekor() ?></div>
-                <div><?= $page->headlineeng() ?></div>
+            <div class="story-header">
+                <div><?= $page->headerkor() ?></div>
+                <div><?= $page->headereng() ?></div>
             </div>
 
             <div class="story-desc">

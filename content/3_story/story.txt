@@ -2,22 +2,22 @@ Title: STORY
 
 ----
 
-Show: true
+Headerkor: 재미를 찾습니다, 유저를 만납니다
 
 ----
 
-Headlinekor: 재미를 찾습니다, 유저를 만납니다
-
-----
-
-Headlineeng: Seeking Fun, Meeting Users
+Headereng: Seeking Fun, Meeting Users
 
 ----
 
 Desc:
 
-스스로 찾아낸 재미를, 가장 잘 만들 수 있는 개발자들이 모여
+스스로 찾아낸 재미를, 가장 잘 만들 수 있는 개발자들이 모여<br>
 플레이어들에게 새로운 경험을 줍니다
+
+----
+
+Show: true
 
 ----
 

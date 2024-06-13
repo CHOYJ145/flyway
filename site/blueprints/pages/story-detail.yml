@@ -1,0 +1,35 @@
+title: story detail
+
+columns:
+  info:
+    width: 1/2
+    sections:
+      fields:
+        type: fields
+        fields:
+          title:
+            label: title
+            type: text
+          desc:
+            label: desc
+            type: text
+          type:
+            label: type
+            type: select
+            width: 1/2
+            options:
+              News: news
+              Youtube: youtube
+          img:
+            label: img
+            type: files
+  link:
+    width: 1/2
+    sections:
+      fields1:
+        type: fields
+        fields:
+          contactLink:
+            label: link
+            type: url
+

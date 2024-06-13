@@ -1,13 +1,34 @@
 title: story
 
-sections:
-  fields:
-    type: fields
-    fields:
-      show:
-        label: page active
-        type: toggle
-        width: 1/3
-        option:
-          - off
-          - on
+columns:
+  util:
+    width: 1/3
+    sections:
+      fields:
+        type: fields
+        fields:
+          show:
+            label: page active
+            type: toggle
+            option:
+              - off
+              - on
+          headerkor:
+            label: 한글 소개글
+            type: text
+          headereng:
+            label: 영문 소개글
+            type: text
+          desc:
+            label: desc
+            type: textarea
+
+  main:
+    width: 2/3
+    sections:
+      items:
+        type: pages
+        layout: cards
+        image:
+          cover: true
+        template: story-detail
